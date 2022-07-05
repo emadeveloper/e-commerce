@@ -1,0 +1,50 @@
+[
+    {
+      "precio": 1500,
+      "id": 1,
+      "title": "Iphone 12",
+      "thumbnailUrl": "/assests/iphone-12.jpg"
+    },
+    {
+      "precio": 1300,
+      "id": 2,
+      "title": "Iphone 11",
+      "thumbnailUrl": "/assests/iphone-11.jpg"
+    },
+    {
+      "precio": 1100,
+      "id": 3,
+      "title": "Iphone X",
+      "thumbnailUrl": "/assests/iphone-X.jpg"
+    },
+    {
+      "precio": 1400,
+      "id": 4,
+      "title": "Galaxy S22",
+      "thumbnailUrl": "/assests/Galaxy-s22.jpg"
+    },
+    {
+      "precio": 1200,
+      "id": 5,
+      "title": "Galaxy S21",
+      "thumbnailUrl": "/assests/galaxy-s21.jpg"
+    },
+    {
+      "precio": 1100,
+      "id": 6,
+      "title": "Galaxy S20",
+      "thumbnailUrl": "/assests/galaxy-s20.jpg"
+    },
+    {
+      "precio": 1100,
+      "id": 7,
+      "title": "Galaxy Note20",
+      "thumbnailUrl": "/assests/galaxy-note-20.jpg"
+    },
+    {
+      "precio": 650,
+      "id": 8,
+      "title": "Galaxy A53",
+      "thumbnailUrl": "/assests/galaxy-a53.jpg"
+    }
+  ]
