@@ -1,3 +1,18 @@
+//Alert inicio de pagina
+swal("Bienvenido a nuestro E-Commerce")
+
+
+//Sweet Alert funcion
+const mostrarAlert = () => {
+    swal ("Agregaste un producto al carrito!", "", "success")
+}
+
+const advertenciaVaciar = () => {
+    swal ("Esta seguro que desea eliminar producto/os del carrito?",{
+        buttons: ["Si", "No, seguir comprando"]
+    });
+}
+
 const cards = document.getElementById('cards')
 const items = document.getElementById('items')
 const footer = document.getElementById('footer')
@@ -12,6 +27,7 @@ let carrito = {}
 document.addEventListener('DOMContentLoaded', e => { fetchData() });
 cards.addEventListener('click', e => { addCarrito(e) });
 items.addEventListener('click', e => { btnAumentarDisminuir(e) })
+
 
 // Traer productos
 const fetchData = async () => {
@@ -39,6 +55,7 @@ const addCarrito = e => {
         // console.log(e.target.dataset.id)
         // console.log(e.target.parentElement)
         setCarrito(e.target.parentElement)
+        mostrarAlert()
     }
     e.stopPropagation()
 }
@@ -109,6 +126,7 @@ const pintarFooter = () => {
     boton.addEventListener('click', () => {
         carrito = {}
         pintarCarrito()
+        advertenciaVaciar()
     })
 
 }
@@ -134,5 +152,4 @@ const btnAumentarDisminuir = e => {
     }
     e.stopPropagation()
 }
-
 
