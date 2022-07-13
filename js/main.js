@@ -3,21 +3,31 @@
 //Alert inicio de pagina
 swal("Bienvenido a nuestro E-Commerce")
 
+//Carrito en LocalStorage
+const nombreCarritoEnLocalStorage = 'carrito'
+//carrito
+let carrito = {}
 
 //Sweet Alert funcion
 const mostrarAlert = () => {
     swal ("Agregaste un producto al carrito!", "", "success")
-}
+};
 
 const advertenciaVaciar = () => {
-    swal ("Esta seguro que desea eliminar producto/os del carrito?",{
-        buttons: ["Si", "No, seguir comprando"]
-    });
-}
+    swal ("Eliminaste con exito todos los productos del carrito", "", "success")
+};
 
-
+//Fetch data 
 document.addEventListener("DOMContentLoaded", () => {
     fetchData()
+    // Leer del localStorage a ver si hay algo guardado del carrito
+    var carritoGuardadoEnLocalStorage = localStorage.getItem(nombreCarritoEnLocalStorage);
+    if (carritoGuardadoEnLocalStorage != null) {
+        //Si había algo guardado en el local storage, leerlo y pasar de "json serializado en String" a "objeto JavaScript"
+        carrito = JSON.parse(carritoGuardadoEnLocalStorage)
+    }
+    //Modificar al objeto carrito y volver a "pintar el carrito" en el html
+    pintarCarrito()
 })
 
 const fetchData = async () => {
@@ -31,7 +41,7 @@ const fetchData = async () => {
         console.log(error)
     }
 }
-
+//Renderizar cards de productos
 const contendorProductos = document.querySelector('#contenedor-productos')
 const pintarProductos = (data) => {
     const template = document.querySelector('#template-productos').content
@@ -49,8 +59,7 @@ const pintarProductos = (data) => {
     contendorProductos.appendChild(fragment)
 }
 
-let carrito = {}
-
+//Detectar Botones
 const detectarBotones = (data) => {
     const botones = document.querySelectorAll('.card button')
 
@@ -64,14 +73,15 @@ const detectarBotones = (data) => {
             }
             carrito[producto.id] = { ...producto }
             // console.log('carrito', carrito)
-            pintarCarrito()
+            guardarCarritoEnLocalStorage();
+            pintarCarrito();
             mostrarAlert();
         })
     })
 }
 
 const items = document.querySelector('#items')
-
+//Renderizar Carrito
 const pintarCarrito = () => {
 
     //carrito innerHTML
@@ -101,7 +111,7 @@ const pintarCarrito = () => {
     accionBotones()
 
 }
-
+//Renderizar Footer carrito
 const footer = document.querySelector('#footer-carrito')
 const pintarFooter = () => {
 
@@ -109,7 +119,7 @@ const pintarFooter = () => {
 
     if (Object.keys(carrito).length === 0) {
         footer.innerHTML = `
-        <th scope="row" colspan="5">Carrito vacío con innerHTML</th>
+        <th scope="row" colspan="5">Tu Carrito esta vacío! Empeza a comprar ahora</th>
         `
         return
     }
@@ -133,19 +143,19 @@ const pintarFooter = () => {
     //vaciar el carrito
     const boton = document.querySelector('#vaciar-carrito')
     boton.addEventListener('click', () => {
-        carrito = {}
-        pintarCarrito()
-        advertenciaVaciar()
+        carrito = {};
+        pintarCarrito();
+        advertenciaVaciar();
     })
+};
 
-}
-
+//Accion botones
 const accionBotones = () => {
     const botonesAgregar = document.querySelectorAll('#items .btn-info')
     const botonesEliminar = document.querySelectorAll('#items .btn-danger')
 
     // console.log(botonesAgregar)
-    //Agregar cantidad(1) del carrito
+    //Agregar cantidad(+1) del carrito
     botonesAgregar.forEach(btn => {
         btn.addEventListener('click', () => {
             // console.log(btn.dataset.id)
@@ -153,10 +163,11 @@ const accionBotones = () => {
             producto.cantidad ++
             carrito[btn.dataset.id] = { ...producto }
             pintarCarrito();
+            guardarCarritoEnLocalStorage();
             
         })
     })
-    //Eliminar cantidad (1) del carrito
+    //Eliminar cantidad (-1) del carrito
     botonesEliminar.forEach(btn => {
         btn.addEventListener('click', () => {
             const producto = carrito[btn.dataset.id]
@@ -166,8 +177,17 @@ const accionBotones = () => {
             } else {
                 carrito[btn.dataset.id] = { ...producto }
             }
-            pintarCarrito()
+            pintarCarrito();
+            guardarCarritoEnLocalStorage();
         })
     })
+}
+
+//Funcion guardar items del carrito en LocalStorage
+function guardarCarritoEnLocalStorage() {
+    //Pasar de "objeto JavaScript" a "string serializado como JSON"
+    const carritoComoJSONString = JSON.stringify(carrito)
+    //Guardar el string en localStorage en la clave (key) "carrito" (donde vamos a ir a buscarla)
+    localStorage.setItem(nombreCarritoEnLocalStorage, carritoComoJSONString)
 }
 

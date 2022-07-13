@@ -46,5 +46,11 @@
       "id": 8,
       "title": "Galaxy A53",
       "thumbnailUrl": "/assests/galaxy-a53.jpg"
+    },
+    {
+      "precio": 400,
+      "id": 9,
+      "title": "Galaxy A23",
+      "thumbnailUrl": "/assests/galaxy-a53.jpg"
     }
   ]
