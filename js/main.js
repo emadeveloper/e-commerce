@@ -1,7 +1,7 @@
 //JAVASCRIPT
 
 //Alert inicio de pagina
-swal("Bienvenido a nuestro E-Commerce")
+swal("Bienvenido a nuestra Tienda digital E-Commerce");
 
 //Carrito en LocalStorage
 const nombreCarritoEnLocalStorage = 'carrito'
@@ -10,12 +10,17 @@ let carrito = {}
 
 //Sweet Alert funcion
 const mostrarAlert = () => {
-    swal ("Agregaste un producto al carrito!", "", "success")
+    swal ("Agregaste un producto a tu carrito!", "", "success")
 };
 
 const advertenciaVaciar = () => {
     swal ("Eliminaste con exito todos los productos del carrito", "", "success")
 };
+
+const saludoDeCompra = () => {
+    swal ("Felicidades por tu nueva compra!", "", "success")
+};
+
 
 //Fetch data 
 document.addEventListener("DOMContentLoaded", () => {
@@ -147,7 +152,16 @@ const pintarFooter = () => {
         pintarCarrito();
         advertenciaVaciar();
     })
+    //Realizar pedido
+    const comprar = document.querySelector('#realizar-compra')
+    comprar.addEventListener ('click', () => {
+        carrito = {};
+        pintarCarrito();
+        saludoDeCompra();
+    });
 };
+
+
 
 //Accion botones
 const accionBotones = () => {
@@ -187,7 +201,7 @@ const accionBotones = () => {
 function guardarCarritoEnLocalStorage() {
     //Pasar de "objeto JavaScript" a "string serializado como JSON"
     const carritoComoJSONString = JSON.stringify(carrito)
-    //Guardar el string en localStorage en la clave (key) "carrito" (donde vamos a ir a buscarla)
+    //Guardar el string en localStorage en la clave (key) "carrito"
     localStorage.setItem(nombreCarritoEnLocalStorage, carritoComoJSONString)
 }
 

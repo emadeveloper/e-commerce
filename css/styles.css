@@ -1,0 +1,35 @@
+
+/* Fuentes */
+@import url('https://fonts.googleapis.com/css2?family=Gideon+Roman&family=Oswald:wght@200;300;400&display=swap');
+
+*{
+    font-family: 'Oswald', sans-serif;
+    margin: 0;
+    padding: 0;
+    scroll-padding-top: 2rem;
+    scroll-behavior: smooth;
+    box-sizing: border-box;
+    list-style: none;
+    text-decoration: none;
+}
+
+
+:root {
+    --color-principal:#3c01c6 ;
+    --color-texto:#000000 ;
+    --color-fondo: #fff;
+}
+
+img {
+    width: 100%;
+}
+
+body {
+    color: var(--color-texto);
+}
+
+.container {
+    max-width: 1068px;
+    margin: auto;
+    width: 100%;
+}
